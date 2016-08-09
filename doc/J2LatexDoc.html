@@ -1,0 +1,684 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<TITLE>BNF for C1.jj</TITLE>
+</HEAD>
+<BODY>
+<H1 ALIGN=CENTER>BNF for C1.jj</H1>
+<H2 ALIGN=CENTER>TOKENS</H2>
+<TABLE>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; SKIP : {
+" "
+| "\r"
+| "\t"
+| "\n"
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; TOKEN : {
+&lt;FUNCTION: "function"&gt;
+| &lt;CONSTRUCTOR: "cons"&gt;
+| &lt;FINAL: "final"&gt;
+| &lt;GOTO: "goto"&gt;
+| &lt;STATIC: "static"&gt;
+| &lt;TRANSIENT: "transient"&gt;
+| &lt;PUBLIC: "public"&gt;
+| &lt;PRIVATE: "private"&gt;
+| &lt;PROTECTED: "protected"&gt;
+| &lt;CLASS: "class"&gt;
+| &lt;INTERFACE: "interface"&gt;
+| &lt;ABSTRACT: "abstract"&gt;
+| &lt;BOOLEAN: "boolean"&gt;
+| &lt;BYTE: "byte"&gt;
+| &lt;DOUBLE: "double"&gt;
+| &lt;INT: "int"&gt;
+| &lt;VOID: "void"&gt;
+| &lt;LONG: "long"&gt;
+| &lt;SHORT: "short"&gt;
+| &lt;FLOAT: "float"&gt;
+| &lt;VOLATILE: "volatile"&gt;
+| &lt;SYNCHRONIZED: "synchronized"&gt;
+| &lt;FOR: "for"&gt;
+| &lt;WHILE: "while"&gt;
+| &lt;DO: "do"&gt;
+| &lt;IF: "if"&gt;
+| &lt;ELSE: "else"&gt;
+| &lt;ELSEIF: "else if"&gt;
+| &lt;TRY: "try"&gt;
+| &lt;CATCH: "catch"&gt;
+| &lt;FINALLY: "finally"&gt;
+| &lt;THROWS: "throws"&gt;
+| &lt;THROW: "throw"&gt;
+| &lt;SWITCH: "switch"&gt;
+| &lt;CASE: "case"&gt;
+| &lt;CONTINUE: "continue"&gt;
+| &lt;EXTENDS: "extends"&gt;
+| &lt;IMPLEMENTS: "implements"&gt;
+| &lt;IMPORT: "import"&gt;
+| &lt;INSTANCEOF: "instanceof"&gt;
+| &lt;THIS: "this"&gt;
+| &lt;TRUE: "true"&gt;
+| &lt;FALSE: "false"&gt;
+| &lt;NULL: "null"&gt;
+| &lt;NEW: "new"&gt;
+| &lt;RETURN: "return"&gt;
+| &lt;PACKAGE: "package"&gt;
+| &lt;BREAK: "break"&gt;
+| &lt;DEFT: "default"&gt;
+| &lt;NATIVE: "native"&gt;
+| &lt;STRICTFP: "strictfp"&gt;
+| &lt;ENUM: "enum"&gt;
+| &lt;CHAR: "char"&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; SPECIAL : {
+&lt;SINGLE_LINE_COMMENT: "//" (~["\n","\r"])* ("\n" | "\r" | "\r\n")?&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; MORE : {
+&lt;"/**" ~["/"]&gt; : IN_JAVA_DOC_COMMENT
+| "/*" : IN_MULTI_LINE_COMMENT
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;IN_JAVA_DOC_COMMENT&gt; SPECIAL : {
+&lt;JAVA_DOC_COMMENT: "*/"&gt; : DEFAULT
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;IN_MULTI_LINE_COMMENT&gt; SPECIAL : {
+&lt;MULTI_LINE_COMMENT: "*/"&gt; : DEFAULT
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;IN_JAVA_DOC_COMMENT,IN_MULTI_LINE_COMMENT&gt; MORE : {
+&lt;~[]&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; TOKEN : {
+&lt;DIVEQ: "/="&gt;
+| &lt;DIV: "/"&gt;
+| &lt;MINUSEQ: "-="&gt;
+| &lt;MINUSMINUS: "--"&gt;
+| &lt;MINUS: "-"&gt;
+| &lt;MODEQ: "%="&gt;
+| &lt;MODULO: "%"&gt;
+| &lt;MULTEQ: "*="&gt;
+| &lt;MULT: "*"&gt;
+| &lt;PLUSEQ: "+="&gt;
+| &lt;PLUSPLUS: "++"&gt;
+| &lt;PLUS: "+"&gt;
+| &lt;LPAR: "("&gt;
+| &lt;RPAR: ")"&gt;
+| &lt;LBRK: "{"&gt;
+| &lt;RBRK: "}"&gt;
+| &lt;LBRC: "["&gt;
+| &lt;RBRC: "]"&gt;
+| &lt;COMMA: ","&gt;
+| &lt;Equals: "=="&gt;
+| &lt;NotEqual: "!="&gt;
+| &lt;NOT: "!"&gt;
+| &lt;ANDEQ: "&amp;="&gt;
+| &lt;ANDAND: "&amp;&amp;"&gt;
+| &lt;AND: "&amp;"&gt;
+| &lt;OROR: "||"&gt;
+| &lt;OREQ: "|="&gt;
+| &lt;OR: "|"&gt;
+| &lt;SHIFTRIGHTEQEQ: "&gt;&gt;&gt;="&gt;
+| &lt;SHIFTRIGHTDOUBLE: "&gt;&gt;&gt;"&gt;
+| &lt;SHIFTRIGHTEQ: "&gt;&gt;="&gt;
+| &lt;GREATEQ: "&gt;="&gt;
+| &lt;SHIFTRIGHT: "&gt;&gt;"&gt;
+| &lt;GREATER: "&gt;"&gt;
+| &lt;SHIFTLEFTEQ: "&lt;&lt;="&gt;
+| &lt;SMALLEQ: "&lt;="&gt;
+| &lt;SHIFTLEFT: "&lt;&lt;"&gt;
+| &lt;SMALLER: "&lt;"&gt;
+| &lt;SEM: ";"&gt;
+| &lt;INIT: "="&gt;
+| &lt;DP: ":"&gt;
+| &lt;AT: "@"&gt;
+| &lt;CHARTK: "\'"&gt;
+| &lt;STRTK: "\""&gt;
+| &lt;QUEST: "?"&gt;
+| &lt;BITOREQ: "^="&gt;
+| &lt;BITOR: "^"&gt;
+| &lt;TILDE: "~"&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+ <!-- Token -->
+ <TR>
+  <TD>
+   <PRE>
+&lt;DEFAULT&gt; TOKEN : {
+&lt;ALPHAB: ["A"-"Z"]&gt;
+| &lt;FINIDENT: &lt;ALPHAB&gt; (&lt;ALPHAC&gt;)*&gt;
+| &lt;CLASSIDENT: &lt;ALPHAB&gt; (&lt;ALPHNUM&gt;)*&gt;
+| &lt;VARIDENT: &lt;ALPHAS&gt; (&lt;ALPHNUM&gt;)*&gt;
+| &lt;ELEMIDENT: (&lt;CLASSIDENT&gt; ["."])? (&lt;THIS&gt; ["."])? (&lt;PACKIDENT&gt; | (&lt;VARIDENT&gt; ["."])* &lt;FINIDENT&gt;)&gt;
+| &lt;PACKIDENT: (&lt;VARIDENT&gt; ["."])* &lt;VARIDENT&gt;&gt;
+| &lt;IMPORTIDENT: (&lt;VARIDENT&gt; ["."])* (&lt;CLASSIDENT&gt; | ["*"])&gt;
+| &lt;FUNCALLIDENT: &lt;ALPHAS&gt; (&lt;ALPHA&gt;)*&gt;
+| &lt;ENUMIDENT: (&lt;CLASSIDENT&gt; | &lt;VARIDENT&gt; | &lt;FINIDENT&gt; | &lt;ALPHA&gt;)+&gt;
+| &lt;CONSTANTD: (&lt;DIGIT&gt; | &lt;OCTDIGIT&gt;) ["."] (&lt;DIGIT&gt; | &lt;OCTDIGIT&gt;)?&gt;
+| &lt;CONSTANTF: (&lt;DIGIT&gt; | &lt;OCTDIGIT&gt;) (["."] (&lt;DIGIT&gt; | &lt;OCTDIGIT&gt;))? ["f","F"]&gt;
+| &lt;CONSTANTL: (&lt;DIGIT&gt; | &lt;HEXDIGIT&gt; | &lt;OCTDIGIT&gt;) ["L","l"]&gt;
+| &lt;CONSTANTI: &lt;DIGIT&gt; | &lt;HEXDIGIT&gt; | &lt;OCTDIGIT&gt;&gt;
+| &lt;CHARDEF: ["\'"] &lt;ALPHA&gt; ["\'"]&gt;
+| &lt;STRINGDEF: ["\""] (&lt;ALPHAALL&gt;)* ["\""]&gt;
+| &lt;ANNOTATION: &lt;AT&gt; (&lt;ALPHA&gt;)*&gt;
+| &lt;#ALPHNUM: &lt;DIGIT&gt; | &lt;ALPHA&gt;&gt;
+| &lt;#DIGIT: (["0"-"9"])+&gt;
+| &lt;#HEXDIGIT: "0" ["x","X"] (["0"-"9","a"-"f","A"-"F"])+&gt;
+| &lt;#OCTDIGIT: "0" (["0"-"7"])*&gt;
+| &lt;ALPHA: ["A"-"Z","a"-"z"]&gt;
+| &lt;ALPHAALL: ["A"-"Z","a"-"z","0"-"9",".","\'",",","!","?","-","_","+","{","}"]&gt;
+| &lt;#ALPHAC: ["A"-"Z","0"-"9","_"]&gt;
+| &lt;#ALPHAS: ["a"-"z"]&gt;
+| &lt;#ALPHAP: ["a"-"z","0"-"9","."]&gt;
+| &lt;#LETTER: ["\u0000"-"\b","\u000e"-"\u001b","$","0"-"9","A"-"Z","_","a"-"z","\u007f"-"\u009f","\u00a2"-"\u00a5","\u00aa","\u00ad","\u00b5","\u00ba","\u00c0"-"\u00d6","\u00d8"-"\u00f6","\u00f8"-"\u0236","\u0250"-"\u02c1","\u02c6"-"\u02d1","\u02e0"-"\u02e4","\u02ee","\u0300"-"\u0357","\u035d"-"\u036f","\u037a","\u0386","\u0388"-"\u038a","\u038c","\u038e"-"\u03a1","\u03a3"-"\u03ce","\u03d0"-"\u03f5","\u03f7"-"\u03fb","\u0400"-"\u0481","\u0483"-"\u0486","\u048a"-"\u04ce","\u04d0"-"\u04f5","\u04f8"-"\u04f9","\u0500"-"\u050f","\u0531"-"\u0556","\u0559","\u0561"-"\u0587","\u0591"-"\u05a1","\u05a3"-"\u05b9","\u05bb"-"\u05bd","\u05bf","\u05c1"-"\u05c2","\u05c4","\u05d0"-"\u05ea","\u05f0"-"\u05f2","\u0600"-"\u0603","\u0610"-"\u0615","\u0621"-"\u063a","\u0640"-"\u0658","\u0660"-"\u0669","\u066e"-"\u06d3","\u06d5"-"\u06dd","\u06df"-"\u06e8","\u06ea"-"\u06fc","\u06ff","\u070f"-"\u074a","\u074d"-"\u074f","\u0780"-"\u07b1","\u0901"-"\u0939","\u093c"-"\u094d","\u0950"-"\u0954","\u0958"-"\u0963","\u0966"-"\u096f","\u0981"-"\u0983","\u0985"-"\u098c","\u098f"-"\u0990","\u0993"-"\u09a8","\u09aa"-"\u09b0","\u09b2","\u09b6"-"\u09b9","\u09bc"-"\u09c4","\u09c7"-"\u09c8","\u09cb"-"\u09cd","\u09d7","\u09dc"-"\u09dd","\u09df"-"\u09e3","\u09e6"-"\u09f3","\u0a01"-"\u0a03","\u0a05"-"\u0a0a","\u0a0f"-"\u0a10","\u0a13"-"\u0a28","\u0a2a"-"\u0a30","\u0a32"-"\u0a33","\u0a35"-"\u0a36","\u0a38"-"\u0a39","\u0a3c","\u0a3e"-"\u0a42","\u0a47"-"\u0a48","\u0a4b"-"\u0a4d","\u0a59"-"\u0a5c","\u0a5e","\u0a66"-"\u0a74","\u0a81"-"\u0a83","\u0a85"-"\u0a8d","\u0a8f"-"\u0a91","\u0a93"-"\u0aa8","\u0aaa"-"\u0ab0","\u0ab2"-"\u0ab3","\u0ab5"-"\u0ab9","\u0abc"-"\u0ac5","\u0ac7"-"\u0ac9","\u0acb"-"\u0acd","\u0ad0","\u0ae0"-"\u0ae3","\u0ae6"-"\u0aef","\u0af1","\u0b01"-"\u0b03","\u0b05"-"\u0b0c","\u0b0f"-"\u0b10","\u0b13"-"\u0b28","\u0b2a"-"\u0b30","\u0b32"-"\u0b33","\u0b35"-"\u0b39","\u0b3c"-"\u0b43","\u0b47"-"\u0b48","\u0b4b"-"\u0b4d","\u0b56"-"\u0b57","\u0b5c"-"\u0b5d","\u0b5f"-"\u0b61","\u0b66"-"\u0b6f","\u0b71","\u0b82"-"\u0b83","\u0b85"-"\u0b8a","\u0b8e"-"\u0b90","\u0b92"-"\u0b95","\u0b99"-"\u0b9a","\u0b9c","\u0b9e"-"\u0b9f","\u0ba3"-"\u0ba4","\u0ba8"-"\u0baa","\u0bae"-"\u0bb5","\u0bb7"-"\u0bb9","\u0bbe"-"\u0bc2","\u0bc6"-"\u0bc8","\u0bca"-"\u0bcd","\u0bd7","\u0be7"-"\u0bef","\u0bf9","\u0c01"-"\u0c03","\u0c05"-"\u0c0c","\u0c0e"-"\u0c10","\u0c12"-"\u0c28","\u0c2a"-"\u0c33","\u0c35"-"\u0c39","\u0c3e"-"\u0c44","\u0c46"-"\u0c48","\u0c4a"-"\u0c4d","\u0c55"-"\u0c56","\u0c60"-"\u0c61","\u0c66"-"\u0c6f","\u0c82"-"\u0c83","\u0c85"-"\u0c8c","\u0c8e"-"\u0c90","\u0c92"-"\u0ca8","\u0caa"-"\u0cb3","\u0cb5"-"\u0cb9","\u0cbc"-"\u0cc4","\u0cc6"-"\u0cc8","\u0cca"-"\u0ccd","\u0cd5"-"\u0cd6","\u0cde","\u0ce0"-"\u0ce1","\u0ce6"-"\u0cef","\u0d02"-"\u0d03","\u0d05"-"\u0d0c","\u0d0e"-"\u0d10","\u0d12"-"\u0d28","\u0d2a"-"\u0d39","\u0d3e"-"\u0d43","\u0d46"-"\u0d48","\u0d4a"-"\u0d4d","\u0d57","\u0d60"-"\u0d61","\u0d66"-"\u0d6f","\u0d82"-"\u0d83","\u0d85"-"\u0d96","\u0d9a"-"\u0db1","\u0db3"-"\u0dbb","\u0dbd","\u0dc0"-"\u0dc6","\u0dca","\u0dcf"-"\u0dd4","\u0dd6","\u0dd8"-"\u0ddf","\u0df2"-"\u0df3","\u0e01"-"\u0e3a","\u0e3f"-"\u0e4e","\u0e50"-"\u0e59","\u0e81"-"\u0e82","\u0e84","\u0e87"-"\u0e88","\u0e8a","\u0e8d","\u0e94"-"\u0e97","\u0e99"-"\u0e9f","\u0ea1"-"\u0ea3","\u0ea5","\u0ea7","\u0eaa"-"\u0eab","\u0ead"-"\u0eb9","\u0ebb"-"\u0ebd","\u0ec0"-"\u0ec4","\u0ec6","\u0ec8"-"\u0ecd","\u0ed0"-"\u0ed9","\u0edc"-"\u0edd","\u0f00","\u0f18"-"\u0f19","\u0f20"-"\u0f29","\u0f35","\u0f37","\u0f39","\u0f3e"-"\u0f47","\u0f49"-"\u0f6a","\u0f71"-"\u0f84","\u0f86"-"\u0f8b","\u0f90"-"\u0f97","\u0f99"-"\u0fbc","\u0fc6","\u1000"-"\u1021","\u1023"-"\u1027","\u1029"-"\u102a","\u102c"-"\u1032","\u1036"-"\u1039","\u1040"-"\u1049","\u1050"-"\u1059","\u10a0"-"\u10c5","\u10d0"-"\u10f8","\u1100"-"\u1159","\u115f"-"\u11a2","\u11a8"-"\u11f9","\u1200"-"\u1206","\u1208"-"\u1246","\u1248","\u124a"-"\u124d","\u1250"-"\u1256","\u1258","\u125a"-"\u125d","\u1260"-"\u1286","\u1288","\u128a"-"\u128d","\u1290"-"\u12ae","\u12b0","\u12b2"-"\u12b5","\u12b8"-"\u12be","\u12c0","\u12c2"-"\u12c5","\u12c8"-"\u12ce","\u12d0"-"\u12d6","\u12d8"-"\u12ee","\u12f0"-"\u130e","\u1310","\u1312"-"\u1315","\u1318"-"\u131e","\u1320"-"\u1346","\u1348"-"\u135a","\u1369"-"\u1371","\u13a0"-"\u13f4","\u1401"-"\u166c","\u166f"-"\u1676","\u1681"-"\u169a","\u16a0"-"\u16ea","\u16ee"-"\u16f0","\u1700"-"\u170c","\u170e"-"\u1714","\u1720"-"\u1734","\u1740"-"\u1753","\u1760"-"\u176c","\u176e"-"\u1770","\u1772"-"\u1773","\u1780"-"\u17d3","\u17d7","\u17db"-"\u17dd","\u17e0"-"\u17e9","\u180b"-"\u180d","\u1810"-"\u1819","\u1820"-"\u1877","\u1880"-"\u18a9","\u1900"-"\u191c","\u1920"-"\u192b","\u1930"-"\u193b","\u1946"-"\u196d","\u1970"-"\u1974","\u1d00"-"\u1d6b","\u1e00"-"\u1e9b","\u1ea0"-"\u1ef9","\u1f00"-"\u1f15","\u1f18"-"\u1f1d","\u1f20"-"\u1f45","\u1f48"-"\u1f4d","\u1f50"-"\u1f57","\u1f59","\u1f5b","\u1f5d","\u1f5f"-"\u1f7d","\u1f80"-"\u1fb4","\u1fb6"-"\u1fbc","\u1fbe","\u1fc2"-"\u1fc4","\u1fc6"-"\u1fcc","\u1fd0"-"\u1fd3","\u1fd6"-"\u1fdb","\u1fe0"-"\u1fec","\u1ff2"-"\u1ff4","\u1ff6"-"\u1ffc","\u200c"-"\u200f","\u202a"-"\u202e","\u203f"-"\u2040","\u2054","\u2060"-"\u2063","\u206a"-"\u206f","\u2071","\u207f","\u20a0"-"\u20b1","\u20d0"-"\u20dc","\u20e1","\u20e5"-"\u20ea","\u2102","\u2107","\u210a"-"\u2113","\u2115","\u2119"-"\u211d","\u2124","\u2126","\u2128","\u212a"-"\u212d","\u212f"-"\u2131","\u2133"-"\u2139","\u213d"-"\u213f","\u2145"-"\u2149","\u2160"-"\u2183","\u3005"-"\u3007","\u3021"-"\u302f","\u3031"-"\u3035","\u3038"-"\u303c","\u3041"-"\u3096","\u3099"-"\u309a","\u309d"-"\u309f","\u30a1"-"\u30ff","\u3105"-"\u312c","\u3131"-"\u318e","\u31a0"-"\u31b7","\u31f0"-"\u31ff","\u3400"-"\u4db5","\u4e00"-"\u9fa5","\ua000"-"\ua48c","\uac00"-"\ud7a3","\ud801","\ud802","\ud834","\udc00","\udc01","\udd7b","\uf900"-"\ufa2d","\ufa30"-"\ufa6a","\ufb00"-"\ufb06","\ufb13"-"\ufb17","\ufb1d"-"\ufb28","\ufb2a"-"\ufb36","\ufb38"-"\ufb3c","\ufb3e","\ufb40"-"\ufb41","\ufb43"-"\ufb44","\ufb46"-"\ufbb1","\ufbd3"-"\ufd3d","\ufd50"-"\ufd8f","\ufd92"-"\ufdc7","\ufdf0"-"\ufdfc","\ufe00"-"\ufe0f","\ufe20"-"\ufe23","\ufe33"-"\ufe34","\ufe4d"-"\ufe4f","\ufe69","\ufe70"-"\ufe74","\ufe76"-"\ufefc","\ufeff","\uff04","\uff10"-"\uff19","\uff21"-"\uff3a","\uff3f","\uff41"-"\uff5a","\uff65"-"\uffbe","\uffc2"-"\uffc7","\uffca"-"\uffcf","\uffd2"-"\uffd7","\uffda"-"\uffdc","\uffe0"-"\uffe1","\uffe5"-"\uffe6","\ufff9"-"\ufffb"]&gt;
+}
+
+   </PRE>
+  </TD>
+ </TR>
+</TABLE>
+<H2 ALIGN=CENTER>NON-TERMINALS</H2>
+<TABLE>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of a comment block*/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod1">comment</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;MULT&gt; )? ( &lt;AT&gt; &lt;VARIDENT&gt; )? ( &lt;ALPHAALL&gt; | &lt;VARIDENT&gt; | &lt;CLASSIDENT&gt; | &lt;PACKIDENT&gt; ) )*</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of class imports**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod2">imports</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;IMPORT&gt; ( &lt;STATIC&gt; )? &lt;IMPORTIDENT&gt; &lt;SEM&gt; )*</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the program (tree root)**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod3">program</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;PACKAGE&gt; ( &lt;PACKIDENT&gt; | &lt;VARIDENT&gt; ) &lt;SEM&gt; )? <A HREF="#prod2">imports</A> ( <A HREF="#prod4">classdef</A> | <A HREF="#prod5">enumdef</A> )* &lt;EOF&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the function/variable/class modifiers**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod6">moddef</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;PUBLIC&gt; | &lt;PROTECTED&gt; | &lt;PRIVATE&gt; )? ( &lt;ABSTRACT&gt; | &lt;STATIC&gt; | &lt;FINAL&gt; )* ( &lt;TRANSIENT&gt; | &lt;VOLATILE&gt; | &lt;SYNCHRONIZED&gt; | &lt;NATIVE&gt; | &lt;STRICTFP&gt; )?</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the datatypes**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod7">datdef</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;BOOLEAN&gt; | &lt;BYTE&gt; | &lt;FLOAT&gt; | &lt;DOUBLE&gt; | &lt;INT&gt; | &lt;LONG&gt; | &lt;CHAR&gt; ) | &lt;VOID&gt; | ( <A HREF="#prod8">imps</A> ) ) ( &lt;LBRC&gt; &lt;RBRC&gt; )?</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of a java class.**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod4">classdef</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE><A HREF="#prod6">moddef</A> ( ( &lt;CLASS&gt; <A HREF="#prod8">imps</A> ( &lt;EXTENDS&gt; <A HREF="#prod8">imps</A> )? ( &lt;IMPLEMENTS&gt; <A HREF="#prod8">imps</A> )? ) | ( &lt;INTERFACE&gt; <A HREF="#prod8">imps</A> ( &lt;EXTENDS&gt; <A HREF="#prod8">imps</A> )? ) ) &lt;LBRK&gt; ( <A HREF="#prod9">varexps</A> )* &lt;RBRK&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**The list of implemented interfaces**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod8">imps</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;CLASSIDENT&gt; | &lt;ALPHAB&gt; ) ( &lt;SMALLER&gt; ( <A HREF="#prod8">imps</A> &lt;GREATER&gt; )* )? ( &lt;COMMA&gt; ( &lt;CLASSIDENT&gt; | &lt;ALPHAB&gt; ) ( &lt;SMALLER&gt; ( <A HREF="#prod8">imps</A> &lt;GREATER&gt; )* )? )*</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of local fields**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod10">fielddef</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE><A HREF="#prod6">moddef</A> <A HREF="#prod7">datdef</A> ( &lt;VARIDENT&gt; | &lt;FINIDENT&gt; ) ( &lt;LBRC&gt; ( <A HREF="#prod11">unary</A> )? &lt;RBRC&gt; )? ( <A HREF="#prod12">assignment</A> )? ( &lt;COMMA&gt; ( &lt;VARIDENT&gt; | &lt;FINIDENT&gt; ) ( &lt;LBRC&gt; ( <A HREF="#prod11">unary</A> )? &lt;RBRC&gt; )? ( ( &lt;LBRK&gt; )? <A HREF="#prod12">assignment</A> ( &lt;RBRK&gt; )? )? )*</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of an enum*/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod5">enumdef</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;ENUM&gt; &lt;VARIDENT&gt; &lt;LBRK&gt; ( ( &lt;CLASSIDENT&gt; | &lt;VARIDENT&gt; | &lt;ALPHA&gt; | &lt;FINIDENT&gt; ) ( &lt;COMMA&gt; )? )* &lt;RBRK&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of a variable expression(modifiers and datatypes combined)*/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod9">varexps</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;ANNOTATION&gt; )* <A HREF="#prod6">moddef</A> ( <A HREF="#prod5">enumdef</A> | <A HREF="#prod7">datdef</A> ) ( &lt;VARIDENT&gt; | &lt;FINIDENT&gt; )? ( ( <A HREF="#prod13">params</A> ( &lt;THROWS&gt; <A HREF="#prod8">imps</A> )? ( &lt;SEM&gt; | &lt;LBRK&gt; ( <A HREF="#prod14">one_line</A> )* &lt;RBRK&gt; ) ) | ( ( ( &lt;LBRC&gt; ( <A HREF="#prod11">unary</A> )? &lt;RBRC&gt; )? ( <A HREF="#prod12">assignment</A> )? ( &lt;COMMA&gt; ( &lt;VARIDENT&gt; | &lt;FINIDENT&gt; ) ( &lt;LBRC&gt; ( <A HREF="#prod11">unary</A> )? &lt;RBRC&gt; )? ( ( &lt;LBRK&gt; )? <A HREF="#prod12">assignment</A> ( &lt;RBRK&gt; )? )? )* ) &lt;SEM&gt; ) )</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the parameters of a function**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod13">params</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;LPAR&gt; ( <A HREF="#prod6">moddef</A> <A HREF="#prod7">datdef</A> &lt;VARIDENT&gt; ( &lt;COMMA&gt; <A HREF="#prod6">moddef</A> <A HREF="#prod7">datdef</A> &lt;VARIDENT&gt; )* )? &lt;RPAR&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of a code line in the functionbody**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod14">one_line</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( <A HREF="#prod15">operators</A> &lt;SEM&gt; | <A HREF="#prod10">fielddef</A> &lt;SEM&gt; | <A HREF="#prod16">ifdef</A> | <A HREF="#prod17">switchcase</A> | <A HREF="#prod18">loopDef</A> | <A HREF="#prod19">trycatch</A> | &lt;RETURN&gt; ( &lt;NEW&gt; )? <A HREF="#prod20">atom</A> &lt;SEM&gt; | &lt;NEW&gt; <A HREF="#prod21">varNameOrFunctionCall</A> &lt;SEM&gt; | <A HREF="#prod22">exception</A> &lt;SEM&gt; )</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Defines the throwing of exceptions.*/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod22">exception</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;THROW&gt; ( &lt;NEW&gt; )? <A HREF="#prod21">varNameOrFunctionCall</A></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**The definition of if/elseif/else**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod16">ifdef</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;IF&gt; &lt;LPAR&gt; <A HREF="#prod15">operators</A> &lt;RPAR&gt; &lt;LBRK&gt; ( <A HREF="#prod14">one_line</A> )* &lt;RBRK&gt; ( &lt;ELSEIF&gt; &lt;LPAR&gt; <A HREF="#prod15">operators</A> &lt;RPAR&gt; &lt;LBRK&gt; ( <A HREF="#prod14">one_line</A> )* &lt;RBRK&gt; )* ( &lt;ELSE&gt; &lt;LBRK&gt; ( <A HREF="#prod14">one_line</A> )* &lt;RBRK&gt; )?</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the ternary if expression.*/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod23">ternary</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;QUEST&gt; <A HREF="#prod20">atom</A> &lt;DP&gt; <A HREF="#prod20">atom</A></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**The definition of switch/case**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod17">switchcase</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;SWITCH&gt; &lt;LPAR&gt; <A HREF="#prod15">operators</A> &lt;RPAR&gt; &lt;LBRK&gt; ( &lt;CASE&gt; ( <A HREF="#prod20">atom</A> | &lt;FINIDENT&gt; ) &lt;DP&gt; <A HREF="#prod24">casebody</A> ( &lt;BREAK&gt; &lt;SEM&gt; )? )* ( &lt;DEFT&gt; &lt;DP&gt; <A HREF="#prod24">casebody</A> ( &lt;BREAK&gt; &lt;SEM&gt; )? )? ( &lt;CASE&gt; ( <A HREF="#prod20">atom</A> | &lt;FINIDENT&gt; ) &lt;DP&gt; <A HREF="#prod24">casebody</A> ( &lt;BREAK&gt; &lt;SEM&gt; )? )* &lt;RBRK&gt;</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**The defintion of a case body in a switch/case statement**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod24">casebody</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( <A HREF="#prod14">one_line</A> )*</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**The definition of a try/catch block**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod19">trycatch</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;TRY&gt; &lt;LBRK&gt; <A HREF="#prod24">casebody</A> &lt;RBRK&gt; ( &lt;CATCH&gt; <A HREF="#prod13">params</A> &lt;LBRK&gt; <A HREF="#prod24">casebody</A> &lt;RBRK&gt; )+ ( &lt;FINALLY&gt; &lt;LBRK&gt; <A HREF="#prod24">casebody</A> &lt;RBRK&gt; )?</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Declaration of for/foreach/while/dowhile loops**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod18">loopDef</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;FOR&gt; &lt;LPAR&gt; ( <A HREF="#prod10">fielddef</A> )? ( &lt;SEM&gt; ( <A HREF="#prod15">operators</A> )? &lt;SEM&gt; ( <A HREF="#prod15">operators</A> )? | &lt;DP&gt; ( &lt;PACKIDENT&gt; | &lt;VARIDENT&gt; ) ) &lt;RPAR&gt; &lt;LBRK&gt; ( <A HREF="#prod14">one_line</A> )* &lt;RBRK&gt; ) | &lt;DO&gt; &lt;LBRK&gt; ( <A HREF="#prod14">one_line</A> )* &lt;RBRK&gt; &lt;WHILE&gt; &lt;LPAR&gt; <A HREF="#prod15">operators</A> &lt;RPAR&gt; &lt;SEM&gt; | &lt;WHILE&gt; &lt;LPAR&gt; <A HREF="#prod15">operators</A> &lt;RPAR&gt; &lt;LBRK&gt; ( <A HREF="#prod14">one_line</A> )* &lt;RBRK&gt; )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod15">operators</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE><A HREF="#prod25">preinc</A> ( <A HREF="#prod12">assignment</A> )? <A HREF="#prod26">term</A> <A HREF="#prod27">smallgreat</A> <A HREF="#prod28">greater</A> <A HREF="#prod29">addmin</A> <A HREF="#prod30">modulo</A> <A HREF="#prod31">shift</A> <A HREF="#prod32">andor</A> <A HREF="#prod33">postinc</A></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the shift operations**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod29">addmin</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;PLUS&gt; | &lt;PLUSEQ&gt; | &lt;MINUSEQ&gt; | &lt;MINUS&gt; ) <A HREF="#prod15">operators</A> )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the and/or operations**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod32">andor</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;OR&gt; | &lt;OREQ&gt; | &lt;OROR&gt; | &lt;BITOR&gt; | &lt;BITOREQ&gt; | &lt;AND&gt; | &lt;ANDEQ&gt; | &lt;ANDAND&gt; ) <A HREF="#prod15">operators</A> )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the and/or operations**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod30">modulo</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;MODULO&gt; | &lt;MODEQ&gt; ) <A HREF="#prod15">operators</A> )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of an assignment**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod12">assignment</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>&lt;INIT&gt; ( <A HREF="#prod20">atom</A> ( <A HREF="#prod23">ternary</A> )? | &lt;NEW&gt; <A HREF="#prod21">varNameOrFunctionCall</A> | &lt;FINIDENT&gt; | &lt;THIS&gt; )</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the shift operations**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod31">shift</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;SHIFTLEFT&gt; | &lt;SHIFTLEFTEQ&gt; | &lt;SHIFTRIGHT&gt; | &lt;SHIFTRIGHTEQ&gt; | &lt;SHIFTRIGHTDOUBLE&gt; | &lt;SHIFTRIGHTEQEQ&gt; ) <A HREF="#prod15">operators</A> )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the preinc/predec operation**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod25">preinc</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;PLUSPLUS&gt; | &lt;MINUSMINUS&gt; | &lt;NOT&gt; | &lt;TILDE&gt; )? <A HREF="#prod20">atom</A></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the postinc/postdec operation**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod33">postinc</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;PLUSPLUS&gt; | &lt;MINUSMINUS&gt; ) )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE></TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod28">greater</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;Equals&gt; | &lt;NotEqual&gt; | &lt;INSTANCEOF&gt; ) <A HREF="#prod20">atom</A> )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the shift operations**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod27">smallgreat</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;GREATER&gt; | &lt;GREATEQ&gt; | &lt;SMALLER&gt; | &lt;SMALLEQ&gt; ) <A HREF="#prod20">atom</A> )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of the mult/div operations**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod26">term</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;DIV&gt; | &lt;DIVEQ&gt; | &lt;MULT&gt; | &lt;MULTEQ&gt; ) <A HREF="#prod20">atom</A> )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE></TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Differentiation from a varName, an unary constant and a FunctionCall**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod20">atom</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;CHARDEF&gt; | &lt;STRINGDEF&gt; )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( ( &lt;LPAR&gt; <A HREF="#prod7">datdef</A> &lt;RPAR&gt; )? ( <A HREF="#prod11">unary</A> | ( &lt;TRUE&gt; | &lt;FALSE&gt; | &lt;NULL&gt; ) | <A HREF="#prod21">varNameOrFunctionCall</A> | <A HREF="#prod23">ternary</A> | &lt;LPAR&gt; <A HREF="#prod15">operators</A> &lt;RPAR&gt; ) )</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Differentiation of a varName or a functionCall**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod21">varNameOrFunctionCall</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;VARIDENT&gt; | ( &lt;CLASSIDENT&gt; ( &lt;SMALLER&gt; &lt;CLASSIDENT&gt; &lt;GREATER&gt; )? ) | &lt;ELEMIDENT&gt; )+ ( &lt;LBRC&gt; <A HREF="#prod11">unary</A> &lt;RBRC&gt; )? ( &lt;LPAR&gt; ( <A HREF="#prod15">operators</A> ( &lt;COMMA&gt; <A HREF="#prod15">operators</A> )* )? &lt;RPAR&gt; ( &lt;LBRK&gt; ( <A HREF="#prod9">varexps</A> )* &lt;RBRK&gt; )? )?</TD>
+</TR>
+ <!-- Special token -->
+ <TR>
+  <TD>
+<PRE>
+/**Definition of a positive or negative unary**/</PRE>
+  </TD>
+ </TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE><A NAME="prod11">unary</A></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>::=</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;MINUS&gt; )? ( &lt;CONSTANTI&gt; )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;CONSTANTL&gt; )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;CONSTANTF&gt; )</TD>
+</TR>
+<TR>
+<TD ALIGN=RIGHT VALIGN=BASELINE></TD>
+<TD ALIGN=CENTER VALIGN=BASELINE>|</TD>
+<TD ALIGN=LEFT VALIGN=BASELINE>( &lt;CONSTANTD&gt; )</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>
